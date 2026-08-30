@@ -381,6 +381,9 @@ header .btn-gold{padding:.7em 1.35em}
 footer{background:var(--paper-3);border-top:1px solid var(--line);padding:clamp(48px,6vw,74px) 0 28px}
 .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px}
 .foot-brand img{height:52px;margin-bottom:18px}
+.foot-logo-light{display:none}
+[data-theme="dark"] .foot-logo-green{display:none}
+[data-theme="dark"] .foot-logo-light{display:block}
 .foot-brand p{color:var(--ink-2);font-size:.94rem;max-width:38ch}
 .foot-col h5{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:600}
 .foot-col a,.foot-col p{display:block;color:var(--ink-2);font-size:.96rem;padding:5px 0;transition:color .25s}
@@ -425,7 +428,7 @@ footer{background:var(--paper-3);border-top:1px solid var(--line);padding:clamp(
 
 <!-- ===================== LOADER ===================== -->
 <div id="loader">
-  <img class="lmark" src="assets/logo-white.png" alt="بن سعيدان" onerror="this.style.display='none'"/>
+  <img class="lmark" src="assets/logo-light.png" alt="بن سعيدان" onerror="this.style.display='none'"/>
   <div class="lbar"><i></i></div>
 </div>
 
@@ -433,7 +436,7 @@ footer{background:var(--paper-3);border-top:1px solid var(--line);padding:clamp(
 <header id="header">
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="الرئيسية">
-      <img src="assets/logo-white.png" alt="شركة حمد محمد بن سعيدان العقارية" />
+      <img src="assets/logo-light.png" alt="شركة حمد محمد بن سعيدان العقارية" />
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
@@ -749,7 +752,8 @@ footer{background:var(--paper-3);border-top:1px solid var(--line);padding:clamp(
   <div class="wrap">
     <div class="foot-top">
       <div class="foot-brand">
-        <img src="assets/logo-white.png" alt="شركة حمد محمد بن سعيدان العقارية" class="foot-logo" />
+        <img src="assets/logo-white.png" alt="شركة حمد محمد بن سعيدان العقارية" class="foot-logo foot-logo-green" />
+        <img src="assets/logo-light.png" alt="شركة حمد محمد بن سعيدان العقارية" class="foot-logo foot-logo-light" />
         <p data-ar="مشروع أبحر الشمالية — مجتمعٌ سكنيٌّ عصريٌّ على الواجهة الشمالية لجدة، بتطوير شركة حمد محمد بن سعيدان العقارية." data-en="Abhur Al-Shamaliya — a contemporary residential community on Jeddah's north coast, developed by Hamad Mohammed Bin Saedan Real Estate Co.">مشروع أبحر الشمالية — مجتمعٌ سكنيٌّ عصريٌّ على الواجهة الشمالية لجدة، بتطوير شركة حمد محمد بن سعيدان العقارية.</p>
       </div>
       <div class="foot-col">
@@ -798,7 +802,15 @@ function applyLang(l){
     el.placeholder = l==='ar'?el.getAttribute('data-ph-ar'):el.getAttribute('data-ph-en');
   });
   document.title = l==='ar'?'مشروع أبحر الشمالية · جدة | Abhur Al-Shamaliya':'Abhur Al-Shamaliya · Jeddah | مشروع أبحر الشمالية';
+  setArrows();
   gallery.recalc();
+}
+/* gallery arrows point the intuitive way in each direction */
+function setArrows(){
+  const L='<path d="M15 18l-6-6 6-6"/>', R='<path d="M9 18l6-6-6-6"/>';
+  const rtl = document.documentElement.dir==='rtl';
+  const prev=document.querySelector('#galPrev svg'), next=document.querySelector('#galNext svg');
+  if(prev&&next){ prev.innerHTML = rtl?R:L; next.innerHTML = rtl?L:R; }
 }
 langBtn.addEventListener('click',()=>applyLang(lang==='ar'?'en':'ar'));
 
