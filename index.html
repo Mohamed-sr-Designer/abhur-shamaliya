@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>مشروع أبحر الشمالية · جدة | Abhur Al-Shamaliya</title>
+<meta name="description" content="مشروع أبحر الشمالية — مجتمع سكني عصري على الواجهة الشمالية لجدة من شركة حمد محمد بن سعيدان العقارية. تصميم معماري معاصر بالحجر الطبيعي، مسابح وأفنية خاصة، وتشطيبات فاخرة. Abhur Al-Shamaliya — a contemporary residential community on Jeddah's northern coast by Hamad Mohammed Bin Saedan Real Estate Co." />
+<meta property="og:title" content="مشروع أبحر الشمالية · جدة | Abhur Al-Shamaliya" />
+<meta property="og:description" content="مجتمع سكني عصري على الواجهة الشمالية لجدة — شركة حمد محمد بن سعيدان العقارية." />
+<meta property="og:type" content="website" />
+<link rel="icon" href="assets/logo-gold.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================ TOKENS ============================ */
+:root{
+  /* brand */
+  --gold:#B78B36;        /* readable gold on paper */
+  --gold-2:#D9AE5E;
+  --gold-3:#E7C888;
+  --gold-deep:#8f6d27;
+  --green:#0C7A54;
+  --green-deep:#075C3F;
+  --green-soft:#3f9d76;
+
+  /* neutrals (LIGHT default — warm paper) */
+  --ink:#201c15;
+  --ink-2:#4b453b;
+  --muted:#7c7364;
+  --paper:#faf6ef;
+  --paper-2:#f2ebdd;
+  --paper-3:#ece2d0;
+  --card:#ffffff;
+  --card-2:#fbf8f2;
+  --line:rgba(32,28,21,.10);
+  --line-2:rgba(32,28,21,.16);
+  --shadow:0 30px 70px -46px rgba(60,45,20,.42);
+  --shadow-sm:0 14px 34px -26px rgba(60,45,20,.4);
+
+  /* accents shared */
+  --acc:var(--gold);
+  --acc-2:var(--green);
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --maxw:1240px;
+  --font-ar:"IBM Plex Sans Arabic",sans-serif;
+  --font-disp:"IBM Plex Sans Arabic",sans-serif;
+  --font-body:"IBM Plex Sans Arabic",sans-serif;
+
+  --grain:.03;
+}
+/* EN typography swap */
+.lang-en{
+  --font-disp:"Cormorant Garamond",serif;
+  --font-body:"Jost",sans-serif;
+}
+/* ============================ DARK THEME ============================ */
+[data-theme="dark"]{
+  --ink:#f4ecdd;
+  --ink-2:#d3c9b7;
+  --muted:#9a917f;
+  --paper:#14110d;
+  --paper-2:#1b1712;
+  --paper-3:#221d16;
+  --card:rgba(255,255,255,.045);
+  --card-2:rgba(255,255,255,.03);
+  --line:rgba(255,255,255,.10);
+  --line-2:rgba(255,255,255,.16);
+  --gold:#D9AE5E;
+  --gold-deep:#b98f3f;
+  --green:#4bb98d;
+  --green-soft:#6fceac;
+  --shadow:0 40px 90px -50px rgba(0,0,0,.85);
+  --shadow-sm:0 20px 44px -30px rgba(0,0,0,.8);
+  --grain:.05;
+}
+/* header + hero + loader keep a dark canvas in BOTH themes */
+header, .hero, .m-menu, #loader, .cta-band{
+  --ink:#f6efe2; --ink-2:#e2d8c6; --muted:#c3b8a3;
+  --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.24);
+  --gold:#E7C888; --green:#6fceac;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-body);
+  background:var(--paper);
+  color:var(--ink);
+  line-height:1.8;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  transition:background-color .5s var(--ease),color .5s var(--ease);
+}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--gold);color:#fff}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+
+/* grain */
+body::after{
+  content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:var(--grain);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+}
+[data-theme="dark"] body::after{mix-blend-mode:screen}
+
+/* ============================ TYPO HELPERS ============================ */
+.eyebrow{
+  font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold);font-weight:600;display:inline-flex;align-items:center;gap:.7em;
+}
+.lang-ar .eyebrow{letter-spacing:.14em}
+.eyebrow::after{content:"";width:34px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.h-sec{
+  font-family:var(--font-disp);
+  font-weight:600;line-height:1.14;letter-spacing:-.01em;
+  font-size:clamp(1.9rem,4.4vw,3.2rem);
+  margin:.35em 0 .5em;color:var(--ink);
+}
+.lang-en .h-sec{font-weight:600;letter-spacing:0}
+.lead{color:var(--ink-2);font-size:clamp(1.02rem,1.5vw,1.16rem);max-width:60ch}
+.sec{padding:clamp(70px,10vw,128px) 0;position:relative}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;justify-content:center;
+  font-family:var(--font-body);font-weight:600;font-size:.98rem;
+  padding:.92em 1.7em;border-radius:100px;cursor:pointer;border:1px solid transparent;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s,border-color .3s;
+  white-space:nowrap;
+}
+.btn svg{width:1.05em;height:1.05em}
+.btn-gold{background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#fff;box-shadow:0 16px 34px -18px rgba(160,120,40,.7)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 22px 44px -18px rgba(160,120,40,.85)}
+.btn-ghost{background:transparent;border-color:var(--line-2);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+/* ============================ LOADER ============================ */
+#loader{
+  position:fixed;inset:0;z-index:10000;background:#14110d;
+  display:grid;place-items:center;gap:26px;
+  transition:opacity .7s var(--ease),visibility .7s;
+}
+#loader.done{opacity:0;visibility:hidden}
+#loader .lmark{width:120px;opacity:0;transform:translateY(10px);animation:lin .9s var(--ease) forwards}
+#loader .lbar{width:170px;height:2px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+#loader .lbar i{display:block;height:100%;width:40%;background:linear-gradient(90deg,var(--gold-2),var(--gold-3));animation:lslide 1.1s var(--ease) infinite}
+@keyframes lin{to{opacity:1;transform:none}}
+@keyframes lslide{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+
+/* ============================ HEADER ============================ */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  transition:background .4s var(--ease),backdrop-filter .4s,border-color .4s,padding .4s;
+  border-bottom:1px solid transparent;padding:18px 0;
+}
+header.scrolled{
+  background:rgba(16,13,9,.72);backdrop-filter:blur(16px) saturate(1.3);
+  border-bottom-color:rgba(255,255,255,.09);padding:11px 0;
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{height:44px;width:auto;transition:height .4s var(--ease)}
+header.scrolled .brand img{height:38px}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{
+  font-size:.94rem;color:var(--ink-2);padding:.5em .95em;border-radius:100px;position:relative;
+  transition:color .25s;font-weight:500;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a.active{color:var(--gold)}
+.nav-tools{display:flex;align-items:center;gap:10px}
+.icon-btn{
+  width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:var(--ink);
+  transition:transform .3s var(--ease),background .3s,color .3s;font-weight:600;font-size:.8rem;
+}
+.icon-btn:hover{transform:translateY(-2px);color:var(--gold);background:rgba(255,255,255,.11)}
+.icon-btn svg{width:18px;height:18px}
+.burger{display:none}
+header .btn-gold{padding:.7em 1.35em}
+
+/* mobile menu */
+.m-menu{
+  position:fixed;inset:0;z-index:950;background:#14110d;
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 34px;
+  transform:translateX(100%);transition:transform .5s var(--ease);
+}
+.lang-en .m-menu{transform:translateX(-100%)}
+.m-menu.open{transform:none}
+.m-menu a{font-family:var(--font-disp);font-size:1.7rem;color:var(--ink);padding:.35em 0;border-bottom:1px solid rgba(255,255,255,.08);transition:color .25s,padding-inline-start .3s}
+.m-menu a:hover{color:var(--gold);padding-inline-start:10px}
+.m-close{position:absolute;top:26px;inset-inline-end:26px}
+.m-menu .mm-foot{margin-top:26px;color:var(--muted);font-size:.9rem;display:flex;flex-direction:column;gap:6px;border:0}
+
+/* ============================ HERO ============================ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:flex-end;
+  color:var(--ink);overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:heroZoom 16s ease-out forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero-bg::after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(16,13,9,.55) 0%,rgba(16,13,9,.12) 34%,rgba(16,13,9,.35) 66%,rgba(16,13,9,.92) 100%),
+    radial-gradient(120% 90% at 80% 10%,rgba(183,139,54,.22),transparent 55%);
+}
+.hero-inner{position:relative;width:100%;padding-bottom:clamp(40px,7vw,86px);padding-top:130px}
+.hero .eyebrow{color:var(--gold-3)}
+.hero h1{
+  font-family:var(--font-disp);font-weight:600;
+  font-size:clamp(2.9rem,8vw,6.4rem);line-height:1;letter-spacing:-.02em;
+  margin:.18em 0 .3em;
+  text-shadow:0 4px 40px rgba(0,0,0,.35);
+}
+.lang-ar .hero h1{font-weight:700}
+.hero .sub{max-width:56ch;color:var(--ink-2);font-size:clamp(1.05rem,1.7vw,1.28rem);margin-bottom:1.7em}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-scroll{position:absolute;inset-inline-start:50%;bottom:22px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--muted);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+.hero-scroll .mouse{width:22px;height:36px;border:1.5px solid var(--muted);border-radius:14px;position:relative}
+.hero-scroll .mouse::after{content:"";position:absolute;top:6px;left:50%;transform:translateX(-50%);width:3px;height:7px;border-radius:2px;background:var(--gold-3);animation:scrolldot 1.6s var(--ease) infinite}
+@keyframes scrolldot{0%{opacity:0;transform:translate(-50%,0)}40%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
+
+/* spec bar */
+.spec-bar{
+  position:relative;z-index:2;background:var(--paper);border-top:1px solid var(--line);
+  margin-top:-1px;
+}
+.spec-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.spec-grid .cell{
+  padding:clamp(20px,3vw,34px) clamp(16px,2.4vw,30px);
+  border-inline-start:1px solid var(--line);position:relative;
+}
+.spec-grid .cell:first-child{border-inline-start:0}
+.spec-grid .cell .k{font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:.5em}
+.spec-grid .cell .v{font-family:var(--font-disp);font-size:clamp(1.35rem,2.6vw,2rem);font-weight:600;color:var(--ink);line-height:1.1}
+.lang-ar .spec-grid .cell .v{font-weight:700}
+.spec-grid .cell .v small{font-size:.62em;color:var(--gold);font-weight:600}
+
+/* ============================ INTRO ============================ */
+.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,84px);align-items:center}
+.intro-copy p{margin-bottom:1.1em;color:var(--ink-2)}
+.intro-copy p:last-child{margin-bottom:0}
+.intro-media{position:relative}
+.intro-media img{border-radius:20px;box-shadow:var(--shadow);width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+.intro-media .badge{
+  position:absolute;inset-inline-start:-22px;bottom:34px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:18px 22px;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px);
+}
+.intro-media .badge .n{font-family:var(--font-disp);font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.intro-media .badge .l{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+/* ============================ FEATURES ============================ */
+.feat-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:clamp(34px,5vw,60px)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feat-card{
+  background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px 30px;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s;position:relative;overflow:hidden;
+}
+.feat-card::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(183,139,54,.05));opacity:0;transition:opacity .4s}
+.feat-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:rgba(183,139,54,.4)}
+.feat-card:hover::before{opacity:1}
+.feat-ic{
+  width:56px;height:56px;border-radius:14px;display:grid;place-items:center;margin-bottom:20px;
+  background:linear-gradient(150deg,rgba(183,139,54,.16),rgba(12,122,84,.1));color:var(--gold);
+  border:1px solid rgba(183,139,54,.28);
+}
+.feat-ic svg{width:26px;height:26px;stroke-width:1.6}
+.feat-card h3{font-family:var(--font-disp);font-size:1.32rem;font-weight:600;margin-bottom:.5em;color:var(--ink)}
+.lang-ar .feat-card h3{font-weight:700;font-size:1.24rem}
+.feat-card p{font-size:.96rem;color:var(--ink-2)}
+.feat-card .num{position:absolute;inset-inline-end:20px;top:16px;font-family:var(--font-disp);font-size:.9rem;color:var(--muted);letter-spacing:.1em}
+
+/* ============================ SHOWCASE (alt blocks) ============================ */
+.show-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,72px);align-items:center;margin-bottom:clamp(56px,8vw,110px)}
+.show-block:last-child{margin-bottom:0}
+.show-block.rev .show-media{order:2}
+.show-media{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.show-media img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .9s var(--ease)}
+.show-media:hover img{transform:scale(1.05)}
+.show-media .tag{position:absolute;top:18px;inset-inline-start:18px;background:rgba(16,13,9,.6);backdrop-filter:blur(8px);color:#f4ecdd;font-size:.8rem;font-weight:600;letter-spacing:.05em;padding:.5em 1em;border-radius:100px;border:1px solid rgba(255,255,255,.16)}
+.show-copy .num{font-family:var(--font-disp);color:var(--gold);font-size:1rem;letter-spacing:.24em;font-weight:600}
+.show-copy h3{font-family:var(--font-disp);font-size:clamp(1.6rem,3vw,2.3rem);font-weight:600;margin:.35em 0 .55em;line-height:1.16;color:var(--ink)}
+.lang-ar .show-copy h3{font-weight:700}
+.show-copy p{color:var(--ink-2);margin-bottom:1.2em}
+.mini-list{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.mini-list li{display:flex;align-items:center;gap:12px;list-style:none;color:var(--ink-2);font-size:.98rem}
+.mini-list li svg{width:20px;height:20px;color:var(--green);flex-shrink:0}
+
+/* ============================ LOCATION ============================ */
+.loc{background:var(--paper-2)}
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,70px);align-items:center}
+.loc-copy .lead{margin-bottom:1.6em}
+.loc-points{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.loc-points .pt{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;transition:transform .35s var(--ease),border-color .35s}
+.loc-points .pt:hover{transform:translateY(-4px);border-color:rgba(183,139,54,.4)}
+.loc-points .pt .pt-ic{color:var(--gold);margin-bottom:8px}
+.loc-points .pt .pt-ic svg{width:24px;height:24px;stroke-width:1.6}
+.loc-points .pt h4{font-size:1.02rem;font-weight:600;margin-bottom:2px;color:var(--ink)}
+.loc-points .pt span{font-size:.86rem;color:var(--muted)}
+.loc-visual{position:relative;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);min-height:420px}
+.loc-visual img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.loc-visual .ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(16,13,9,.82));display:flex;align-items:flex-end;padding:30px}
+.loc-visual .ov .city{color:#f4ecdd}
+.loc-visual .ov .city b{font-family:var(--font-disp);font-size:1.8rem;font-weight:600;display:block}
+.loc-visual .ov .city span{color:#d8ccb6;font-size:.9rem}
+
+/* ============================ GALLERY ============================ */
+.gal-head{margin-bottom:clamp(30px,4vw,48px);text-align:center;display:flex;flex-direction:column;align-items:center}
+.gal-head .eyebrow::after{display:none}
+.gal-head .eyebrow::before{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.gal-viewport{overflow:hidden;border-radius:22px;cursor:grab}
+.gal-viewport.drag{cursor:grabbing}
+.gal-track{display:flex;gap:16px;transition:transform .6s var(--ease);will-change:transform}
+.gal-slide{flex:0 0 clamp(280px,58%,660px);border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm)}
+.gal-slide img{width:100%;aspect-ratio:16/10;object-fit:cover;pointer-events:none}
+.gal-slide .cap{position:absolute;bottom:0;left:0;right:0;padding:26px 24px 18px;background:linear-gradient(transparent,rgba(16,13,9,.8));color:#f4ecdd;font-family:var(--font-disp);font-size:1.15rem;font-weight:600}
+.gal-nav{display:flex;justify-content:center;gap:12px;margin-top:26px}
+.gal-nav button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line-2);background:var(--card);color:var(--ink);cursor:pointer;display:grid;place-items:center;transition:transform .3s var(--ease),background .3s,color .3s}
+.gal-nav button:hover{background:var(--gold);color:#fff;border-color:var(--gold);transform:translateY(-2px)}
+.gal-nav button svg{width:20px;height:20px}
+
+/* ============================ CTA BAND ============================ */
+.cta-band{position:relative;overflow:hidden;color:#f4ecdd;text-align:center}
+.cta-band .cta-bg{position:absolute;inset:0;z-index:-2}
+.cta-band .cta-bg img{width:100%;height:100%;object-fit:cover}
+.cta-band .cta-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,13,9,.86),rgba(7,50,40,.8))}
+.cta-band .inner{padding:clamp(64px,9vw,120px) 0}
+.cta-band h2{font-family:var(--font-disp);font-size:clamp(2rem,4.6vw,3.4rem);font-weight:600;margin:.3em auto .4em;max-width:20ch}
+.lang-ar .cta-band h2{font-weight:700}
+.cta-band p{max-width:52ch;margin:0 auto 1.8em;color:#e2d8c6}
+.cta-band .hero-cta{justify-content:center}
+
+/* ============================ CONTACT ============================ */
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(34px,5vw,64px)}
+.contact-info h2{font-family:var(--font-disp);font-size:clamp(1.8rem,3.4vw,2.6rem);font-weight:600;margin-bottom:.4em;color:var(--ink)}
+.lang-ar .contact-info h2{font-weight:700}
+.contact-info .lead{margin-bottom:1.7em}
+.ci-list{display:flex;flex-direction:column;gap:8px}
+.ci-item{display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:14px;border:1px solid var(--line);background:var(--card);transition:transform .35s var(--ease),border-color .35s}
+.ci-item:hover{transform:translateX(6px);border-color:rgba(183,139,54,.4)}
+.lang-en .ci-item:hover{transform:translateX(-6px)}
+.ci-item .ci-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(150deg,rgba(183,139,54,.16),rgba(12,122,84,.1));color:var(--gold);border:1px solid rgba(183,139,54,.26);flex-shrink:0}
+.ci-item .ci-ic svg{width:22px;height:22px}
+.ci-item .k{font-size:.78rem;color:var(--muted);letter-spacing:.08em}
+.ci-item .v{font-weight:600;color:var(--ink);font-size:1.02rem;direction:ltr;unicode-bidi:plaintext}
+.socials{display:flex;gap:10px;margin-top:22px}
+.socials a{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--ink-2);transition:transform .3s var(--ease),background .3s,color .3s,border-color .3s}
+.socials a:hover{background:var(--gold);color:#fff;border-color:var(--gold);transform:translateY(-3px)}
+.socials a svg{width:19px;height:19px}
+
+.form-shell{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(26px,4vw,44px);box-shadow:var(--shadow)}
+.form-shell h3{font-family:var(--font-disp);font-size:1.5rem;font-weight:600;margin-bottom:.3em;color:var(--ink)}
+.lang-ar .form-shell h3{font-weight:700}
+.form-shell .fs-sub{color:var(--muted);font-size:.94rem;margin-bottom:1.6em}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.86rem;color:var(--ink-2);margin-bottom:7px;font-weight:500}
+.field input,.field select,.field textarea{
+  width:100%;padding:.9em 1.1em;border-radius:12px;border:1px solid var(--line-2);
+  background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:.98rem;
+  transition:border-color .3s,box-shadow .3s;
+}
+.field textarea{resize:vertical;min-height:96px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(183,139,54,.16)}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-shell .btn-gold{width:100%;margin-top:6px}
+.form-note{font-size:.8rem;color:var(--muted);text-align:center;margin-top:14px}
+.form-ok{display:none;text-align:center;padding:20px 0}
+.form-ok.show{display:block;animation:fadeUp .5s var(--ease)}
+.form-ok .ok-ic{width:64px;height:64px;border-radius:50%;background:linear-gradient(150deg,var(--green),var(--green-deep));display:grid;place-items:center;margin:0 auto 16px;color:#fff}
+.form-ok .ok-ic svg{width:32px;height:32px}
+.form-ok h4{font-family:var(--font-disp);font-size:1.5rem;color:var(--ink);margin-bottom:.3em}
+
+/* ============================ FOOTER ============================ */
+footer{background:var(--paper-3);border-top:1px solid var(--line);padding:clamp(48px,6vw,74px) 0 28px}
+.foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.foot-brand img{height:52px;margin-bottom:18px}
+.foot-brand p{color:var(--ink-2);font-size:.94rem;max-width:38ch}
+.foot-col h5{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;font-weight:600}
+.foot-col a,.foot-col p{display:block;color:var(--ink-2);font-size:.96rem;padding:5px 0;transition:color .25s}
+.foot-col a:hover{color:var(--gold)}
+.foot-col .v{direction:ltr;unicode-bidi:plaintext}
+.foot-bottom{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:.86rem}
+
+/* to-top */
+.totop{position:fixed;inset-inline-end:24px;bottom:24px;z-index:800;width:48px;height:48px;border-radius:50%;background:var(--gold);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(14px);transition:all .4s var(--ease);box-shadow:0 14px 30px -12px rgba(160,120,40,.7)}
+.totop.show{opacity:1;visibility:visible;transform:none}
+.totop svg{width:22px;height:22px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}.rv.d5{transition-delay:.4s}
+
+/* ============================ RESPONSIVE ============================ */
+@media(max-width:980px){
+  .nav-links{display:none}
+  .burger{display:grid}
+  .intro-grid,.show-block,.show-block.rev .show-media,.loc-grid,.contact-grid,.foot-top{grid-template-columns:1fr}
+  .show-block.rev .show-media{order:0}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .foot-top{gap:30px}
+  .intro-media{max-width:460px;margin-inline:auto}
+  .loc-visual{min-height:320px}
+}
+@media(max-width:640px){
+  .spec-grid{grid-template-columns:1fr 1fr}
+  .spec-grid .cell:nth-child(3){border-inline-start:0}
+  .spec-grid .cell:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .feat-grid,.loc-points,.field-row{grid-template-columns:1fr}
+  .hero-cta{width:100%}
+  .hero-cta .btn{flex:1}
+  header .btn-gold{display:none}
+  .gal-slide{flex:0 0 86%}
+}
+</style>
+</head>
+<body class="lang-ar">
+
+<!-- ===================== LOADER ===================== -->
+<div id="loader">
+  <img class="lmark" src="assets/logo-white.png" alt="بن سعيدان" onerror="this.style.display='none'"/>
+  <div class="lbar"><i></i></div>
+</div>
+
+<!-- ===================== HEADER ===================== -->
+<header id="header">
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="الرئيسية">
+      <img src="assets/logo-white.png" alt="شركة حمد محمد بن سعيدان العقارية" />
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+      <a href="#about" data-ar="المشروع" data-en="Project">المشروع</a>
+      <a href="#features" data-ar="المميزات" data-en="Features">المميزات</a>
+      <a href="#designs" data-ar="التصاميم" data-en="Designs">التصاميم</a>
+      <a href="#location" data-ar="الموقع" data-en="Location">الموقع</a>
+      <a href="#gallery" data-ar="المعرض" data-en="Gallery">المعرض</a>
+      <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="icon-btn" id="langBtn" aria-label="Language">EN</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Theme">
+        <svg id="themeIco" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+      <a href="#contact" class="btn btn-gold" data-ar="سجّل اهتمامك" data-en="Register Interest">سجّل اهتمامك</a>
+      <button class="icon-btn burger" id="burger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== MOBILE MENU ===================== -->
+<div class="m-menu" id="mMenu">
+  <button class="icon-btn m-close" id="mClose" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <a href="#top" data-ar="الرئيسية" data-en="Home">الرئيسية</a>
+  <a href="#about" data-ar="المشروع" data-en="Project">المشروع</a>
+  <a href="#features" data-ar="المميزات" data-en="Features">المميزات</a>
+  <a href="#designs" data-ar="التصاميم" data-en="Designs">التصاميم</a>
+  <a href="#location" data-ar="الموقع" data-en="Location">الموقع</a>
+  <a href="#gallery" data-ar="المعرض" data-en="Gallery">المعرض</a>
+  <a href="#contact" data-ar="تواصل" data-en="Contact">تواصل</a>
+  <div class="mm-foot">
+    <span class="v" style="direction:ltr">920029228</span>
+    <span class="v" style="direction:ltr">info@h-saedan.sa</span>
+  </div>
+</div>
+
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="assets/proj-1.jpg" alt="مشروع أبحر الشمالية" />
+  </div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow" data-ar="شركة حمد محمد بن سعيدان العقارية" data-en="Hamad Mohammed Bin Saedan Real Estate">شركة حمد محمد بن سعيدان العقارية</span>
+    <h1 data-ar="مشروع أبحر الشمالية" data-en="Abhur Al-Shamaliya">مشروع أبحر الشمالية</h1>
+    <p class="sub" data-ar="مجتمع سكني عصري على الواجهة الشمالية لجدة، حيث يلتقي الطراز المعاصر بدفء الحجر الطبيعي وخصوصية الحياة الراقية." data-en="A contemporary residential community on Jeddah's northern coast — where modern architecture meets the warmth of natural stone and the privacy of refined living.">مجتمع سكني عصري على الواجهة الشمالية لجدة، حيث يلتقي الطراز المعاصر بدفء الحجر الطبيعي وخصوصية الحياة الراقية.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-gold" data-ar="سجّل اهتمامك" data-en="Register Interest">سجّل اهتمامك</a>
+      <a href="#about" class="btn btn-ghost" data-ar="استكشف المشروع" data-en="Explore the Project">استكشف المشروع</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="mouse"></span>
+    <span data-ar="مرّر" data-en="Scroll">مرّر</span>
+  </div>
+</section>
+
+<!-- ===================== SPEC BAR ===================== -->
+<div class="spec-bar">
+  <div class="wrap">
+    <div class="spec-grid">
+      <div class="cell rv"><div class="k" data-ar="نوع العقار" data-en="Property Type">نوع العقار</div><div class="v" data-ar="سكني" data-en="Residential">سكني</div></div>
+      <div class="cell rv d1"><div class="k" data-ar="المدينة" data-en="City">المدينة</div><div class="v" data-ar="جدة" data-en="Jeddah">جدة</div></div>
+      <div class="cell rv d2"><div class="k" data-ar="الحي" data-en="District">الحي</div><div class="v" data-ar="أبحر الشمالية" data-en="Abhur North">أبحر الشمالية</div></div>
+      <div class="cell rv d3"><div class="k" data-ar="المساحة الإجمالية" data-en="Total Area">المساحة الإجمالية</div><div class="v">6,254 <small>م² / m²</small></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== INTRO / ABOUT ===================== -->
+<section class="sec" id="about">
+  <div class="wrap intro-grid">
+    <div class="intro-copy">
+      <span class="eyebrow rv" data-ar="نبذة عن المشروع" data-en="About the Project">نبذة عن المشروع</span>
+      <h2 class="h-sec rv d1" data-ar="عنوانٌ جديد للسكن في شمال جدة" data-en="A New Address on Jeddah's North Coast">عنوانٌ جديد للسكن في شمال جدة</h2>
+      <div class="rv d2">
+        <p data-ar="يقع مشروع أبحر الشمالية في واحدة من أرقى وجهات السكن على الساحل الشمالي لمدينة جدة؛ منطقةٌ تجمع بين هدوء البحر وحيوية المدينة وقربها من أبرز الخدمات والمرافق." data-en="Abhur Al-Shamaliya rises in one of the most sought-after coastal districts of northern Jeddah — a setting that blends the calm of the sea, the energy of the city, and easy reach to the finest amenities.">يقع مشروع أبحر الشمالية في واحدة من أرقى وجهات السكن على الساحل الشمالي لمدينة جدة؛ منطقةٌ تجمع بين هدوء البحر وحيوية المدينة وقربها من أبرز الخدمات والمرافق.</p>
+        <p data-ar="صُمّم المشروع على طراز الفلل المتلاصقة بواجهاتٍ من الحجر الطبيعي والخشب، ومساحاتٍ خضراء وتراسات علوية، ووحداتٍ تتمتع بأفنيةٍ ومسابح خاصة تمنح كل عائلةٍ خصوصيتها الكاملة." data-en="Designed as a collection of stone-and-timber townhouses with lush landscaping and rooftop terraces, each residence enjoys its own private courtyard and pool — giving every family complete privacy.">صُمّم المشروع على طراز الفلل المتلاصقة بواجهاتٍ من الحجر الطبيعي والخشب، ومساحاتٍ خضراء وتراسات علوية، ووحداتٍ تتمتع بأفنيةٍ ومسابح خاصة تمنح كل عائلةٍ خصوصيتها الكاملة.</p>
+        <p data-ar="يأتي المشروع بتطوير شركة حمد محمد بن سعيدان العقارية، امتداداً لمسيرةٍ عريقة في تطوير المشاريع السكنية النوعية في المملكة." data-en="Developed by Hamad Mohammed Bin Saedan Real Estate Co., the project extends a long-standing legacy of delivering distinctive residential communities across the Kingdom.">يأتي المشروع بتطوير شركة حمد محمد بن سعيدان العقارية، امتداداً لمسيرةٍ عريقة في تطوير المشاريع السكنية النوعية في المملكة.</p>
+      </div>
+    </div>
+    <div class="intro-media rv d2">
+      <img src="assets/proj-2.jpg" alt="فناء ومسبح خاص" />
+      <div class="badge">
+        <div class="n" data-ar="تحت التنفيذ" data-en="Under Construction" style="font-size:1.35rem">تحت التنفيذ</div>
+        <div class="l" data-ar="حالة المشروع الحالية" data-en="Current project status">حالة المشروع الحالية</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="sec" id="features" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="feat-head">
+      <div>
+        <span class="eyebrow rv" data-ar="لماذا أبحر الشمالية" data-en="Why Abhur Al-Shamaliya">لماذا أبحر الشمالية</span>
+        <h2 class="h-sec rv d1" style="margin-bottom:0" data-ar="مقوّماتٌ تصنع الفارق" data-en="Details That Make the Difference">مقوّماتٌ تصنع الفارق</h2>
+      </div>
+      <p class="lead rv d2" data-ar="كل تفصيلةٍ في المشروع صُمّمت لتقديم تجربة سكنٍ راقية تجمع بين الجمال والوظيفة والخصوصية." data-en="Every detail is designed to deliver a refined living experience that balances beauty, function, and privacy.">كل تفصيلةٍ في المشروع صُمّمت لتقديم تجربة سكنٍ راقية تجمع بين الجمال والوظيفة والخصوصية.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card rv">
+        <span class="num">01</span>
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-5h6v5"/></svg></div>
+        <h3 data-ar="تصميم معماري معاصر" data-en="Contemporary Architecture">تصميم معماري معاصر</h3>
+        <p data-ar="واجهاتٌ من الحجر الطبيعي والخشب بخطوطٍ نظيفة وكتلٍ متدرّجة تمنح المشروع هويةً بصريةً مميزة." data-en="Stone-and-timber façades with clean lines and layered volumes give the project a distinctive visual identity.">واجهاتٌ من الحجر الطبيعي والخشب بخطوطٍ نظيفة وكتلٍ متدرّجة تمنح المشروع هويةً بصريةً مميزة.</p>
+      </div>
+      <div class="feat-card rv d1">
+        <span class="num">02</span>
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 15c2 0 2 1.5 4 1.5S10 15 12 15s2 1.5 4 1.5S18 15 20 15M2 20c2 0 2 1.5 4 1.5S10 20 12 20s2 1.5 4 1.5S22 20 22 20M6 12V5a2 2 0 0 1 4 0M6 12h4"/></svg></div>
+        <h3 data-ar="مسابح وأفنية خاصة" data-en="Private Pools & Courtyards">مسابح وأفنية خاصة</h3>
+        <p data-ar="لكل وحدةٍ فناؤها الخاص ومسبحها المستقل، لتستمتع بمساحةٍ خارجيةٍ آمنةٍ وخاصةٍ بالكامل." data-en="Each home features its own courtyard and private pool — a fully secluded outdoor space of your own.">لكل وحدةٍ فناؤها الخاص ومسبحها المستقل، لتستمتع بمساحةٍ خارجيةٍ آمنةٍ وخاصةٍ بالكامل.</p>
+      </div>
+      <div class="feat-card rv d2">
+        <span class="num">03</span>
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22c4-2 7-5 7-10a7 7 0 1 0-14 0c0 5 3 8 7 10Z"/><path d="M12 12v10M9 15l3-1 3 1"/></svg></div>
+        <h3 data-ar="أسطح وتراسات خضراء" data-en="Green Roofs & Terraces">أسطح وتراسات خضراء</h3>
+        <p data-ar="تراساتٌ علوية ومساحاتٌ مزروعة تمتد على المشروع لتقرّبك من الطبيعة وتوفّر إطلالاتٍ مفتوحة." data-en="Rooftop terraces and planted greenery run through the project, bringing nature closer and opening up the views.">تراساتٌ علوية ومساحاتٌ مزروعة تمتد على المشروع لتقرّبك من الطبيعة وتوفّر إطلالاتٍ مفتوحة.</p>
+      </div>
+      <div class="feat-card rv">
+        <span class="num">04</span>
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l2.4 6.9H22l-6 4.5 2.3 7L12 16.9 5.7 20.4 8 13.4 2 8.9h7.6z"/></svg></div>
+        <h3 data-ar="تشطيبات فاخرة" data-en="Premium Finishes">تشطيبات فاخرة</h3>
+        <p data-ar="خاماتٌ منتقاة وتشطيباتٌ داخليةٌ عالية الجودة تعكس معايير الرقيّ في كل زاويةٍ من الوحدة." data-en="Carefully selected materials and high-quality interior finishes reflect a standard of refinement in every corner.">خاماتٌ منتقاة وتشطيباتٌ داخليةٌ عالية الجودة تعكس معايير الرقيّ في كل زاويةٍ من الوحدة.</p>
+      </div>
+      <div class="feat-card rv d1">
+        <span class="num">05</span>
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+        <h3 data-ar="موقعٌ استراتيجي" data-en="Prime Location">موقعٌ استراتيجي</h3>
+        <p data-ar="على واجهة أبحر الشمالية قرب البحر والكورنيه والمرافق الحيوية، بسهولة وصولٍ إلى قلب جدة." data-en="On the Abhur North waterfront near the sea, corniche, and key amenities — with easy access to central Jeddah.">على واجهة أبحر الشمالية قرب البحر والكورنيه والمرافق الحيوية، بسهولة وصولٍ إلى قلب جدة.</p>
+      </div>
+      <div class="feat-card rv d2">
+        <span class="num">06</span>
+        <div class="feat-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 12l2 2 4-4"/><path d="M12 3l7 3v6c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6z"/></svg></div>
+        <h3 data-ar="مطوّرٌ موثوق" data-en="A Trusted Developer">مطوّرٌ موثوق</h3>
+        <p data-ar="تطوير شركة حمد محمد بن سعيدان العقارية، اسمٌ راسخٌ في السوق العقاري السعودي بخبرةٍ ممتدة." data-en="Developed by Hamad Mohammed Bin Saedan Real Estate Co. — an established name in the Saudi property market.">تطوير شركة حمد محمد بن سعيدان العقارية، اسمٌ راسخٌ في السوق العقاري السعودي بخبرةٍ ممتدة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DESIGNS / SHOWCASE ===================== -->
+<section class="sec" id="designs">
+  <div class="wrap">
+    <div class="feat-head" style="margin-bottom:clamp(40px,6vw,72px)">
+      <div>
+        <span class="eyebrow rv" data-ar="التصاميم" data-en="The Designs">التصاميم</span>
+        <h2 class="h-sec rv d1" style="margin-bottom:0" data-ar="حياةٌ مصمّمةٌ بعناية" data-en="Life, Thoughtfully Designed">حياةٌ مصمّمةٌ بعناية</h2>
+      </div>
+    </div>
+
+    <div class="show-block">
+      <div class="show-media rv"><img src="assets/proj-1.jpg" alt="واجهة الفلل" /><span class="tag" data-ar="الواجهة الخارجية" data-en="Exterior">الواجهة الخارجية</span></div>
+      <div class="show-copy rv d1">
+        <span class="num">01</span>
+        <h3 data-ar="فللٌ متلاصقةٌ بطابعٍ متوسّطي معاصر" data-en="Modern Mediterranean Townhouses">فللٌ متلاصقةٌ بطابعٍ متوسّطي معاصر</h3>
+        <p data-ar="وحداتٌ سكنيةٌ متعددة المستويات بواجهاتٍ حجريةٍ دافئة وشرفاتٍ زجاجية وتفاصيل خشبية، تتوزّع على شارعٍ مصمّمٍ بعنايةٍ مع أرصفةٍ ومساحاتٍ للمشاة." data-en="Multi-level residences with warm stone façades, glass balconies, and timber accents, arranged along a carefully composed street with wide, walkable pavements.">وحداتٌ سكنيةٌ متعددة المستويات بواجهاتٍ حجريةٍ دافئة وشرفاتٍ زجاجية وتفاصيل خشبية، تتوزّع على شارعٍ مصمّمٍ بعنايةٍ مع أرصفةٍ ومساحاتٍ للمشاة.</p>
+        <ul class="mini-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="شرفاتٌ زجاجية بإطلالاتٍ مفتوحة" data-en="Glass balconies with open views">شرفاتٌ زجاجية بإطلالاتٍ مفتوحة</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="مواقف سيارات ومداخل خاصة" data-en="Private entries and parking">مواقف سيارات ومداخل خاصة</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="تنسيقٌ نباتيٌ على امتداد الشارع" data-en="Green landscaping along the street">تنسيقٌ نباتيٌ على امتداد الشارع</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="show-block rev">
+      <div class="show-media rv"><img src="assets/proj-2.jpg" alt="فناء ومسبح خاص" /><span class="tag" data-ar="الفناء الخاص" data-en="Private Courtyard">الفناء الخاص</span></div>
+      <div class="show-copy rv d1">
+        <span class="num">02</span>
+        <h3 data-ar="فناءٌ خاصٌّ ومسبحٌ يخصّك وحدك" data-en="A Private Courtyard & Pool of Your Own">فناءٌ خاصٌّ ومسبحٌ يخصّك وحدك</h3>
+        <p data-ar="أفنيةٌ داخليةٌ مظلّلةٌ بالبرجولات ومجالسٌ خارجية ومسابحُ خاصة، مساحةٌ للاسترخاء والضيافة بعيداً عن الأنظار وفي قلب المنزل." data-en="Shaded pergola courtyards, outdoor lounges, and private pools — a space to relax and entertain, tucked away from view at the heart of your home.">أفنيةٌ داخليةٌ مظلّلةٌ بالبرجولات ومجالسٌ خارجية ومسابحُ خاصة، مساحةٌ للاسترخاء والضيافة بعيداً عن الأنظار وفي قلب المنزل.</p>
+        <ul class="mini-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="مسبحٌ خاصٌّ بكل وحدة" data-en="A private pool per unit">مسبحٌ خاصٌّ بكل وحدة</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="برجولاتٌ ومجالسُ خارجية" data-en="Pergolas and outdoor seating">برجولاتٌ ومجالسُ خارجية</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="جدرانٌ خضراء تمنح الخصوصية" data-en="Green walls for full privacy">جدرانٌ خضراء تمنح الخصوصية</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="show-block">
+      <div class="show-media rv"><img src="assets/proj-3.jpg" alt="واجهة المشروع الكاملة" /><span class="tag" data-ar="المخطط العام" data-en="The Streetscape">المخطط العام</span></div>
+      <div class="show-copy rv d1">
+        <span class="num">03</span>
+        <h3 data-ar="واجهةٌ متناغمةٌ ومجتمعٌ متكامل" data-en="A Cohesive Façade, a Complete Community">واجهةٌ متناغمةٌ ومجتمعٌ متكامل</h3>
+        <p data-ar="تتكرّر الوحدات بإيقاعٍ معماريٍّ متناغمٍ لتشكّل واجهةً موحّدةً للمجتمع، مع تدرّجاتٍ في الكتل والألوان تكسر الرتابة وتمنح كل منزلٍ حضوره الخاص." data-en="Units repeat in a harmonious architectural rhythm to form a unified community frontage, while shifts in massing and tone break monotony and give every home its own presence.">تتكرّر الوحدات بإيقاعٍ معماريٍّ متناغمٍ لتشكّل واجهةً موحّدةً للمجتمع، مع تدرّجاتٍ في الكتل والألوان تكسر الرتابة وتمنح كل منزلٍ حضوره الخاص.</p>
+        <ul class="mini-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="هويةٌ بصريةٌ موحّدة للمجتمع" data-en="A unified community identity">هويةٌ بصريةٌ موحّدة للمجتمع</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="شوارعُ داخليةٌ آمنة" data-en="Safe internal streets">شوارعُ داخليةٌ آمنة</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg><span data-ar="مساحاتٌ خضراء بين الوحدات" data-en="Greenery between the homes">مساحاتٌ خضراء بين الوحدات</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LOCATION ===================== -->
+<section class="sec loc" id="location">
+  <div class="wrap loc-grid">
+    <div class="loc-copy">
+      <span class="eyebrow rv" data-ar="الموقع" data-en="The Location">الموقع</span>
+      <h2 class="h-sec rv d1" data-ar="أبحر الشمالية… حيث يبدأ البحر" data-en="Abhur North — Where the Sea Begins">أبحر الشمالية… حيث يبدأ البحر</h2>
+      <p class="lead rv d2" data-ar="واحدةٌ من أعرق وجهات السكن الساحلي في جدة، تشتهر بمرافقها البحرية ومنتجعاتها ومطاعمها وقربها من مرافق الحياة اليومية." data-en="One of Jeddah's most established coastal destinations — known for its marinas, resorts, dining, and proximity to everyday essentials.">واحدةٌ من أعرق وجهات السكن الساحلي في جدة، تشتهر بمرافقها البحرية ومنتجعاتها ومطاعمها وقربها من مرافق الحياة اليومية.</p>
+      <div class="loc-points">
+        <div class="pt rv d1"><div class="pt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 18c2 0 2-1 4-1s2 1 4 1 2-1 4-1 2 1 4 1M4 14l8-9 8 9"/></svg></div><h4 data-ar="الواجهة البحرية" data-en="The Waterfront">الواجهة البحرية</h4><span data-ar="كورنيش وشواطئ البحر الأحمر" data-en="Red Sea corniche & beaches">كورنيش وشواطئ البحر الأحمر</span></div>
+        <div class="pt rv d2"><div class="pt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2v20M5 8l7-4 7 4M5 8v8l7 4 7-4V8"/></svg></div><h4 data-ar="المراسي واليخوت" data-en="Marinas">المراسي واليخوت</h4><span data-ar="نوادٍ بحرية ومرافئ قريبة" data-en="Yacht clubs & marinas nearby">نوادٍ بحرية ومرافئ قريبة</span></div>
+        <div class="pt rv d3"><div class="pt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 21V7l6-4 6 4v14M15 21V11l6 4v6M8 10h2M8 14h2"/></svg></div><h4 data-ar="خدماتٌ ومرافق" data-en="Amenities">خدماتٌ ومرافق</h4><span data-ar="أسواق ومدارس ومطاعم راقية" data-en="Malls, schools & fine dining">أسواق ومدارس ومطاعم راقية</span></div>
+        <div class="pt rv d4"><div class="pt-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 17h16M6 17V9l6-4 6 4v8M9 17v-4h6v4"/></svg></div><h4 data-ar="سهولة الوصول" data-en="Connectivity">سهولة الوصول</h4><span data-ar="طرقٌ رئيسية إلى قلب جدة" data-en="Main roads to central Jeddah">طرقٌ رئيسية إلى قلب جدة</span></div>
+      </div>
+    </div>
+    <div class="loc-visual rv d2">
+      <img src="assets/proj-1.jpg" alt="أبحر الشمالية، جدة" />
+      <div class="ov"><div class="city"><b data-ar="جدة · أبحر الشمالية" data-en="Jeddah · Abhur North">جدة · أبحر الشمالية</b><span data-ar="المملكة العربية السعودية" data-en="Kingdom of Saudi Arabia">المملكة العربية السعودية</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="sec" id="gallery" style="background:var(--paper-2)">
+  <div class="wrap">
+    <div class="gal-head">
+      <span class="eyebrow rv" data-ar="المعرض" data-en="Gallery">المعرض</span>
+      <h2 class="h-sec rv d1" style="margin-bottom:0" data-ar="لمحاتٌ من المشروع" data-en="Glimpses of the Project">لمحاتٌ من المشروع</h2>
+    </div>
+    <div class="gal-viewport rv d1" id="galVp">
+      <div class="gal-track" id="galTrack">
+        <div class="gal-slide"><img src="assets/proj-1.jpg" alt=""/><div class="cap" data-ar="الواجهة الخارجية" data-en="Exterior view">الواجهة الخارجية</div></div>
+        <div class="gal-slide"><img src="assets/proj-2.jpg" alt=""/><div class="cap" data-ar="الفناء والمسبح الخاص" data-en="Private courtyard & pool">الفناء والمسبح الخاص</div></div>
+        <div class="gal-slide"><img src="assets/proj-3.jpg" alt=""/><div class="cap" data-ar="واجهة المشروع الكاملة" data-en="Full streetscape">واجهة المشروع الكاملة</div></div>
+        <div class="gal-slide"><img src="assets/hero-site.jpg" alt=""/><div class="cap" data-ar="التصميم الداخلي" data-en="Interior design">التصميم الداخلي</div></div>
+      </div>
+    </div>
+    <div class="gal-nav">
+      <button id="galPrev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button id="galNext" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CTA BAND ===================== -->
+<section class="cta-band">
+  <div class="cta-bg"><img src="assets/proj-2.jpg" alt=""/></div>
+  <div class="wrap inner">
+    <span class="eyebrow rv" style="justify-content:center" data-ar="فرصة سكن محدودة" data-en="A Limited Opportunity">فرصة سكن محدودة</span>
+    <h2 class="rv d1" data-ar="امتلك منزلك في أبحر الشمالية" data-en="Own Your Home in Abhur North">امتلك منزلك في أبحر الشمالية</h2>
+    <p class="rv d2" data-ar="سجّل اهتمامك الآن ليتواصل معك فريق المبيعات بتفاصيل الوحدات والأسعار وخيارات الحجز." data-en="Register your interest now and our sales team will reach out with unit details, pricing, and reservation options.">سجّل اهتمامك الآن ليتواصل معك فريق المبيعات بتفاصيل الوحدات والأسعار وخيارات الحجز.</p>
+    <div class="hero-cta rv d3">
+      <a href="#contact" class="btn btn-gold" data-ar="سجّل اهتمامك" data-en="Register Interest">سجّل اهتمامك</a>
+      <a href="https://wa.me/966920029228" target="_blank" rel="noopener" class="btn btn-ghost" data-ar="تواصل عبر واتساب" data-en="Chat on WhatsApp">تواصل عبر واتساب</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section class="sec" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-info">
+      <span class="eyebrow rv" data-ar="تواصل معنا" data-en="Get in Touch">تواصل معنا</span>
+      <h2 class="rv d1" data-ar="نحن هنا للإجابة على استفساراتك" data-en="We're Here to Help">نحن هنا للإجابة على استفساراتك</h2>
+      <p class="lead rv d2" data-ar="فريق شركة حمد محمد بن سعيدان العقارية جاهزٌ لمساعدتك في كل ما يخص مشروع أبحر الشمالية." data-en="The Hamad Mohammed Bin Saedan Real Estate team is ready to assist you with everything about Abhur Al-Shamaliya.">فريق شركة حمد محمد بن سعيدان العقارية جاهزٌ لمساعدتك في كل ما يخص مشروع أبحر الشمالية.</p>
+      <div class="ci-list rv d2">
+        <a class="ci-item" href="tel:920029228"><div class="ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></div><div><div class="k" data-ar="الهاتف الموحّد" data-en="Unified Line">الهاتف الموحّد</div><div class="v">920029228</div></div></a>
+        <a class="ci-item" href="tel:8003022221"><div class="ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></div><div><div class="k" data-ar="الرقم المجاني" data-en="Toll-Free">الرقم المجاني</div><div class="v">8003022221</div></div></a>
+        <a class="ci-item" href="mailto:info@h-saedan.sa"><div class="ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div><div><div class="k" data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</div><div class="v">info@h-saedan.sa</div></div></a>
+        <a class="ci-item" href="https://wa.me/966920029228" target="_blank" rel="noopener"><div class="ci-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 21l2.3-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg></div><div><div class="k" data-ar="واتساب" data-en="WhatsApp">واتساب</div><div class="v">+966 92 002 9228</div></div></a>
+      </div>
+      <div class="socials rv d3">
+        <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.3 8.3L23 22h-6.6l-5.2-6.8L5.3 22H2l7.8-8.9L1.5 2h6.8l4.7 6.2L18.9 2Zm-1.2 18h1.8L7.2 3.8H5.3L17.7 20Z"/></svg></a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2 3.77-2C20.3 8.7 21 10.6 21 13.4V21h-4v-6.7c0-1.6 0-3.7-2.25-3.7S12 12.4 12 14.2V21H9z"/></svg></a>
+        <a href="https://wa.me/966920029228" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 21l2.3-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg></a>
+      </div>
+    </div>
+
+    <div class="form-shell rv d1">
+      <form id="leadForm" novalidate>
+        <h3 data-ar="سجّل اهتمامك بالمشروع" data-en="Register Your Interest">سجّل اهتمامك بالمشروع</h3>
+        <p class="fs-sub" data-ar="املأ النموذج وسيتواصل معك فريقنا في أقرب وقت." data-en="Fill in the form and our team will contact you shortly.">املأ النموذج وسيتواصل معك فريقنا في أقرب وقت.</p>
+        <div class="field-row">
+          <div class="field"><label data-ar="الاسم الكامل" data-en="Full Name">الاسم الكامل</label><input type="text" name="name" required data-ph-ar="اسمك الكريم" data-ph-en="Your name" /></div>
+          <div class="field"><label data-ar="رقم الجوال" data-en="Phone">رقم الجوال</label><input type="tel" name="phone" required dir="ltr" data-ph-ar="05xxxxxxxx" data-ph-en="05xxxxxxxx" /></div>
+        </div>
+        <div class="field"><label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label><input type="email" name="email" dir="ltr" data-ph-ar="you@email.com" data-ph-en="you@email.com" /></div>
+        <div class="field"><label data-ar="نوع الوحدة المهتم بها" data-en="Unit of Interest">نوع الوحدة المهتم بها</label>
+          <select name="unit">
+            <option data-ar="فيلا متلاصقة" data-en="Townhouse">فيلا متلاصقة</option>
+            <option data-ar="دور علوي" data-en="Upper floor">دور علوي</option>
+            <option data-ar="دور أرضي" data-en="Ground floor">دور أرضي</option>
+            <option data-ar="غير محدد بعد" data-en="Not sure yet">غير محدد بعد</option>
+          </select>
+        </div>
+        <div class="field"><label data-ar="رسالتك (اختياري)" data-en="Message (optional)">رسالتك (اختياري)</label><textarea name="msg" data-ph-ar="أخبرنا بما تبحث عنه…" data-ph-en="Tell us what you're looking for…"></textarea></div>
+        <button type="submit" class="btn btn-gold" data-ar="إرسال الطلب" data-en="Send Request">إرسال الطلب</button>
+        <p class="form-note" data-ar="بياناتك سريّةٌ ولن تُستخدم إلا للتواصل بخصوص المشروع." data-en="Your details are confidential and used only to contact you about the project.">بياناتك سريّةٌ ولن تُستخدم إلا للتواصل بخصوص المشروع.</p>
+      </form>
+      <div class="form-ok" id="formOk">
+        <div class="ok-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h4 data-ar="تم استلام طلبك!" data-en="Request Received!">تم استلام طلبك!</h4>
+        <p class="fs-sub" data-ar="شكراً لاهتمامك بمشروع أبحر الشمالية، سيتواصل معك فريقنا قريباً." data-en="Thank you for your interest in Abhur Al-Shamaliya. Our team will be in touch soon.">شكراً لاهتمامك بمشروع أبحر الشمالية، سيتواصل معك فريقنا قريباً.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logo-white.png" alt="شركة حمد محمد بن سعيدان العقارية" class="foot-logo" />
+        <p data-ar="مشروع أبحر الشمالية — مجتمعٌ سكنيٌّ عصريٌّ على الواجهة الشمالية لجدة، بتطوير شركة حمد محمد بن سعيدان العقارية." data-en="Abhur Al-Shamaliya — a contemporary residential community on Jeddah's north coast, developed by Hamad Mohammed Bin Saedan Real Estate Co.">مشروع أبحر الشمالية — مجتمعٌ سكنيٌّ عصريٌّ على الواجهة الشمالية لجدة، بتطوير شركة حمد محمد بن سعيدان العقارية.</p>
+      </div>
+      <div class="foot-col">
+        <h5 data-ar="روابط سريعة" data-en="Quick Links">روابط سريعة</h5>
+        <a href="#about" data-ar="عن المشروع" data-en="About">عن المشروع</a>
+        <a href="#features" data-ar="المميزات" data-en="Features">المميزات</a>
+        <a href="#designs" data-ar="التصاميم" data-en="Designs">التصاميم</a>
+        <a href="#gallery" data-ar="المعرض" data-en="Gallery">المعرض</a>
+        <a href="#contact" data-ar="تواصل معنا" data-en="Contact">تواصل معنا</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-ar="تواصل" data-en="Contact">تواصل</h5>
+        <p class="v">920029228</p>
+        <p class="v">8003022221</p>
+        <p class="v">info@h-saedan.sa</p>
+        <p data-ar="جدة · أبحر الشمالية" data-en="Jeddah · Abhur North">جدة · أبحر الشمالية</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-ar="© 2025 شركة حمد محمد بن سعيدان العقارية. جميع الحقوق محفوظة." data-en="© 2025 Hamad Mohammed Bin Saedan Real Estate Co. All rights reserved.">© 2025 شركة حمد محمد بن سعيدان العقارية. جميع الحقوق محفوظة.</span>
+      <span data-ar="الصور تصوّرات تصميمية للمشروع." data-en="Images are design renders of the project.">الصور تصوّرات تصميمية للمشروع.</span>
+    </div>
+  </div>
+</footer>
+
+<button class="totop" id="toTop" aria-label="Top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+
+<script>
+/* ===================== LOADER ===================== */
+window.addEventListener('load',()=>{setTimeout(()=>document.getElementById('loader').classList.add('done'),650)});
+
+/* ===================== LANGUAGE ===================== */
+const html=document.documentElement, body=document.body, langBtn=document.getElementById('langBtn');
+let lang=localStorage.getItem('abhur-lang')||'ar';
+function applyLang(l){
+  lang=l; localStorage.setItem('abhur-lang',l);
+  html.lang=l; html.dir = l==='ar'?'rtl':'ltr';
+  body.classList.toggle('lang-en',l==='en');
+  body.classList.toggle('lang-ar',l==='ar');
+  langBtn.textContent = l==='ar'?'EN':'ع';
+  document.querySelectorAll('[data-ar]').forEach(el=>{
+    const t = l==='ar'?el.getAttribute('data-ar'):el.getAttribute('data-en');
+    if(t!=null) el.textContent=t;
+  });
+  document.querySelectorAll('[data-ph-ar]').forEach(el=>{
+    el.placeholder = l==='ar'?el.getAttribute('data-ph-ar'):el.getAttribute('data-ph-en');
+  });
+  document.title = l==='ar'?'مشروع أبحر الشمالية · جدة | Abhur Al-Shamaliya':'Abhur Al-Shamaliya · Jeddah | مشروع أبحر الشمالية';
+  gallery.recalc();
+}
+langBtn.addEventListener('click',()=>applyLang(lang==='ar'?'en':'ar'));
+
+/* ===================== THEME ===================== */
+const themeBtn=document.getElementById('themeBtn'), themeIco=document.getElementById('themeIco');
+const moon='<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/>';
+const sun='<path d="M12 3v1M12 20v1M4.2 4.2l.7.7M19.1 19.1l.7.7M3 12h1M20 12h1M4.2 19.8l.7-.7M19.1 4.9l.7-.7"/><circle cx="12" cy="12" r="4"/>';
+let theme=localStorage.getItem('abhur-theme')||'light';
+function applyTheme(t){theme=t;localStorage.setItem('abhur-theme',t);html.setAttribute('data-theme',t);themeIco.innerHTML=t==='dark'?sun:moon;}
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ===================== HEADER SCROLL ===================== */
+const header=document.getElementById('header');
+addEventListener('scroll',()=>{header.classList.toggle('scrolled',scrollY>40);document.getElementById('toTop').classList.toggle('show',scrollY>600);},{passive:true});
+
+/* ===================== MOBILE MENU ===================== */
+const mMenu=document.getElementById('mMenu');
+document.getElementById('burger').addEventListener('click',()=>{mMenu.classList.add('open');body.classList.add('lock')});
+document.getElementById('mClose').addEventListener('click',close);
+mMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+function close(){mMenu.classList.remove('open');body.classList.remove('lock')}
+
+/* ===================== TO TOP ===================== */
+document.getElementById('toTop').addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+/* ===================== REVEAL ===================== */
+const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* ===================== ACTIVE NAV ===================== */
+const secs=[...document.querySelectorAll('section[id],div[id="top"]')];
+const navA=[...document.querySelectorAll('.nav-links a')];
+const navIo=new IntersectionObserver((es)=>es.forEach(e=>{
+  if(e.isIntersecting){const id=e.target.id;navA.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id))}
+}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>navIo.observe(s));
+
+/* ===================== GALLERY ===================== */
+const gallery=(()=>{
+  const vp=document.getElementById('galVp'), track=document.getElementById('galTrack');
+  const slides=[...track.children];
+  let idx=0, gap=16;
+  function step(){return slides[0].getBoundingClientRect().width+gap}
+  function max(){return Math.max(0, slides.length - Math.round(vp.clientWidth/step()))}
+  function go(i){idx=Math.max(0,Math.min(i,max()));const x=idx*step();track.style.transform=`translateX(${html.dir==='rtl'?'':'-'}${x}px)`;}
+  document.getElementById('galNext').addEventListener('click',()=>go(idx+1));
+  document.getElementById('galPrev').addEventListener('click',()=>go(idx-1));
+  // drag
+  let down=false,sx=0,curX=0;
+  vp.addEventListener('pointerdown',e=>{down=true;sx=e.clientX;curX=idx*step();vp.classList.add('drag');vp.setPointerCapture(e.pointerId)});
+  vp.addEventListener('pointermove',e=>{if(!down)return;const d=e.clientX-sx;const base=curX*(html.dir==='rtl'?1:-1);track.style.transition='none';track.style.transform=`translateX(${base+d}px)`});
+  vp.addEventListener('pointerup',e=>{if(!down)return;down=false;vp.classList.remove('drag');track.style.transition='';const d=e.clientX-sx;const dir=html.dir==='rtl'?1:-1;if(d*dir<-60)go(idx+1);else if(d*dir>60)go(idx-1);else go(idx)});
+  return {recalc:()=>go(idx)};
+})();
+addEventListener('resize',()=>gallery.recalc());
+
+/* ===================== FORM ===================== */
+document.getElementById('leadForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target;
+  if(!f.name.value.trim()||!f.phone.value.trim()){f.reportValidity&&f.reportValidity();return;}
+  // TODO: wire to real endpoint / CRM. Currently client-side success only.
+  f.style.display='none';
+  document.getElementById('formOk').classList.add('show');
+});
+
+/* ===================== INIT ===================== */
+applyTheme(theme);
+applyLang(lang);
+</script>
+</body>
+</html>
